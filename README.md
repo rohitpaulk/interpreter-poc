@@ -4,4 +4,4 @@ Follows the book https://craftinginterpreters.com/.
 
 Take all input, print tokens back, one per line.
 
-# Stage 2:
+# Stage 2: Parsing
