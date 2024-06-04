@@ -1,7 +1,3 @@
-def tokenize(source)
-  source.split(/\s+/)
-end
-
 if ARGV[0] != "tokenize"
   puts "Unknown command #{ARGV[0]}"
   exit(1)
@@ -9,13 +5,14 @@ end
 
 source = File.read(ARGV[0])
 
-source.chars.each do |char|
-  case char
-  when "("
-    puts "LEFT_PAREN ( null"
-  when ")"
-    puts "RIGHT_PAREN ) null"
+Scanner.new(source).scan_tokens.each do |token_or_error|
+  case token_or_error
+  when Token
+    puts token_or_error.debug_string
   else
-    puts "Unknown char '#{char}'"
+    puts "Error: #{token_or_error}"
   end
+end
+
+source.chars.each do |char|
 end
