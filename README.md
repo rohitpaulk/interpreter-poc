@@ -1,5 +1,7 @@
 Follows the book https://craftinginterpreters.com/.
 
+Chapters to test names: https://github.com/munificent/craftinginterpreters/blob/01e6f5b8f3e5dfa65674c2f9cf4700d73ab41cf8/tool/bin/test.dart#L599
+
 # Stage #1. Scanning: Parentheses
 
 https://craftinginterpreters.com/scanning.html#recognizing-lexemes
@@ -60,20 +62,36 @@ LEFT_PAREN ( null
 [line 1] Error: Unexpected character.
 ```
 
-# Stage #5. Scanning: Multi-character errors
+Also test exit code!
 
-```
-,.$()#
-```
+# Stage #5: Scanning: Assignment & equality Operators
 
-Expected output:
+https://craftinginterpreters.com/scanning.html#operators
 
-```
-COMMA , null
-DOT . null
-ERROR line 1: Unexpected character $.
-```
+`=`, `==`.
 
-# Stage #6: Scanning: Errors across multiple lines
+# Stage #6: Scanning: Negation & inequality operators
 
-# Stage 4: Parsing
+https://craftinginterpreters.com/scanning.html#operators
+
+`!` && `!=`.
+
+# Stage #7: Scanning: Relational operators
+
+https://craftinginterpreters.com/scanning.html#operators
+
+`<`, `>`, `<=`, `>=`.
+
+# Stage 8: Scanning: Division operator & comments
+
+https://craftinginterpreters.com/scanning.html#longer-lexemes
+
+# Stage #9. Scanning: Whitespace
+
+# Stage #10. Scanning: String literals
+
+https://craftinginterpreters.com/scanning.html#string-literals
+
+# Stage #11. Scanning: Number literals
+
+https://craftinginterpreters.com/scanning.html#number-literals
