@@ -34,10 +34,38 @@ Same as above, add braces into the mix.
 
 # Stage #3. Scanning: Other single-character tokens
 
-`,`, `.`, `-`, `+`, `;`, `*`, `/`
+`,`, `.`, `-`, `+`, `;`, `*`.
 
-Note that "//" cannot appear in the test, that would be a comment.
+`/` is not covered here, it'll be covered in later stages.
 
-# Stage #4. Scanning: Errors
+# Stage #4. Scanning: Single-character errors
+
+```
+,.$
+```
+
+Expected output:
+
+```
+COMMA , null
+DOT . null
+[line 1] Error: Unexpected character.
+```
+
+# Stage #5. Scanning: Multi-character errors
+
+```
+,.$()#
+```
+
+Expected output:
+
+```
+COMMA , null
+DOT . null
+ERROR line 1: Unexpected character $.
+```
+
+# Stage #6: Scanning: Errors across multiple lines
 
 # Stage 4: Parsing
