@@ -105,3 +105,11 @@ https://craftinginterpreters.com/scanning.html#number-literals
 `123.456`
 
 https://craftinginterpreters.com/scanning.html#number-literals
+
+# Stage #13. Scanning: Identifiers
+
+`abcd`, `foo`, `bar` etc.
+
+# Stage #14. Scanning: Reserved words
+
+`or`, `if` etc.
