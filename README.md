@@ -90,8 +90,18 @@ https://craftinginterpreters.com/scanning.html#longer-lexemes
 
 # Stage #10. Scanning: String literals
 
+`"hello"`
+
 https://craftinginterpreters.com/scanning.html#string-literals
 
-# Stage #11. Scanning: Number literals
+# Stage #11. Scanning: Integer literals
+
+`123`
+
+https://craftinginterpreters.com/scanning.html#number-literals
+
+# Stage #12. Scanning: Decimal/float literals
+
+`123.456`
 
 https://craftinginterpreters.com/scanning.html#number-literals
