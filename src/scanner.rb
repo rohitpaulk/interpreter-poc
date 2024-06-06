@@ -63,6 +63,10 @@ class Scanner
     @source[@current_index]
   end
 
+  def next_char
+    @source[@current_index + 1]
+  end
+
   def scan_token
     char = consume_char!
 
@@ -107,8 +111,16 @@ class Scanner
   end
 
   def consume_number!
-    while current_char.match?(/[0-9.]/)
+    while current_char.match?(/[0-9]/)
       consume_char!
+    end
+
+    if current_char == "." && next_char.match?(/[0-9]/)
+      consume_char!
+
+      while current_char.match?(/[0-9]/)
+        consume_char!
+      end
     end
 
     add_token(:number, literal: @source[@start_index...@current_index].to_f)
