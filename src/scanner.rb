@@ -28,6 +28,14 @@ class Scanner
 
   private
 
+  def add_token(type, literal: nil)
+    tokens_or_errors << Token.new(type, @source[@start_index...@current_index], literal, @line_number)
+  end
+
+  def add_error(message)
+    tokens_or_errors << StandardError.new("[line #{@line_number}] Error: #{message}")
+  end
+
   def consume_char!
     current_char.tap do |char|
       @current_index += 1
@@ -43,8 +51,12 @@ class Scanner
     end
   end
 
-  def add_token(type, literal: nil)
-    tokens_or_errors << Token.new(type, @source[@start_index...@current_index], literal, @line_number)
+  def consume_char_unless!(char)
+    if current_char == char
+      false
+    else
+      consume_char!
+    end
   end
 
   def current_char
@@ -75,8 +87,32 @@ class Scanner
       else
         add_token(:equal)
       end
+    when "/"
+      if consume_char_if!("/")
+        until is_at_end? || consume_char!.eql?("\n")
+          # consume comment until newline / EOF
+        end
+      else
+        add_token(:slash)
+      end
+    when " ", "\t", "\r", "\n"
+      # ignore whitespace
+    when '"'
+      consume_string!
     else
-      StandardError.new("Unknown character")
+      add_error("Unknown character '#{char.inspect}'")
+    end
+  end
+
+  def consume_string!
+    while consume_char_unless!('"') && !is_at_end?
+      consume_char!
+    end
+
+    if consume_char_if!('"')
+      add_token(:string, literal: @source[@start_index + 1...@current_index - 1])
+    else
+      add_error("Unterminated string '#{@source[@start_index+1...@current_index]}'")
     end
   end
 end

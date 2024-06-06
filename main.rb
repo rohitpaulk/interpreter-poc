@@ -17,6 +17,6 @@ Scanner.new(source).scan_tokens.each do |token_or_error|
   when Token
     puts token_or_error.debug_string
   else
-    puts "Error: #{token_or_error}"
+    puts token_or_error
   end
 end
