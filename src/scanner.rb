@@ -112,7 +112,7 @@ class Scanner
     if consume_char_if!('"')
       add_token(:string, literal: @source[@start_index + 1...@current_index - 1])
     else
-      add_error("Unterminated string '#{@source[@start_index+1...@current_index]}'")
+      add_error("Unterminated string '#{@source[@start_index + 1...@current_index]}'")
     end
   end
 end
