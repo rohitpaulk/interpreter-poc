@@ -9,6 +9,6 @@ class Token
   end
 
   def debug_string
-    "#{@type.to_s.upcase} #{@lexeme} #{@literal || "null"} #{@line_number}"
+    "#{@type.to_s.upcase} #{@lexeme} #{@literal || "null"}"
   end
 end

@@ -45,6 +45,7 @@ GEM
       rubocop-performance (~> 1.21.0)
     strscan (3.1.0)
     unicode-display_width (2.5.0)
+    zeitwerk (2.6.15)
 
 PLATFORMS
   arm64-darwin-23
@@ -52,6 +53,7 @@ PLATFORMS
 
 DEPENDENCIES
   standard
+  zeitwerk
 
 BUNDLED WITH
    2.5.10
