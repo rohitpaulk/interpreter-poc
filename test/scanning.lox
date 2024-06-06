@@ -1,4 +1,3 @@
-/(){} "test" // Comment
 // This is a comment too
-"yoyo"
-"unterminated
+"yoyo" 123.1234
+"unterminated"

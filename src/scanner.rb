@@ -99,9 +99,19 @@ class Scanner
       # ignore whitespace
     when '"'
       consume_string!
+    when /\d/
+      consume_number!
     else
       add_error("Unknown character '#{char.inspect}'")
     end
+  end
+
+  def consume_number!
+    while current_char.match?(/[0-9.]/)
+      consume_char!
+    end
+
+    add_token(:number, literal: @source[@start_index...@current_index].to_f)
   end
 
   def consume_string!
