@@ -23,8 +23,7 @@ It'll then execute your program like this:
 The tester will verify that the output matches the tokens in `test.lox`:
 
 ```
-LEFT_PAREN ( null
-LEFT_PAREN ( null
+LEFT_PAREN ( null LEFT_PAREN ( null
 RIGHT_PAREN ) null
 ```
 
@@ -113,3 +112,42 @@ https://craftinginterpreters.com/scanning.html#number-literals
 # Stage #14. Scanning: Reserved words
 
 `or`, `if` etc.
+
+# Extension 1: Parsing Expressions
+
+## Stage #1. Binary operators: Equality
+
+```
+"hello" == "world"
+```
+
+```
+./your_program.sh parse test.lox
+(== "hello" "world")
+```
+
+## Stage #2. Binary operators: Inequality
+
+```
+"hello" != "world"
+```
+
+```
+./your_program.sh parse test.lox
+(!= "hello" "world")
+```
+
+## Stage #1. Equality
+
+```
+"hello"
+```
+
+```
+./your_program.sh parse test.lox
+("hello")
+```
+
+## Extension 2: Evaluation Expressions
+
+## Extension 3: Interpreter
