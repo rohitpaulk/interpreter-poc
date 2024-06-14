@@ -131,23 +131,34 @@ operator       → "==" | "!=" | "<" | "<=" | ">" | ">="
                | "+"  | "-"  | "*" | "/" ;
 ```
 
-## Stage #1. Unary operators & Literals
+## Stage #1. Unary operators & literals
 
 ```
 -1 => (- 1)
 !2 => (! 2)
-!true => (+ true)
-!false => (- false)
+!true => (! true)
+!false => (! false)
 !"test" => (! "test")
 ```
 
 ## Stage #2. Binary operators: Addition & Subtraction
 
+expression     → ...
+equality       → ...
+comparison     → ...
+term           → ...
+factor         → ...
+unary          → ...
+primary        → ...
+
 ```
+1 + 2 => (+ 1 2)
+1 + 2 + 3 => (+ 1 (+ 2 3))
+1 - 2 => (- 1 2)
 1 + 2 - 3 => (+ 1 (- 2 3))
 ```
 
-## Stage #3. Binary operators: Multiplication & Division
+## Stage #4. Binary operators: Multiplication
 
 ```
 "hello" != "world"

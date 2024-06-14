@@ -72,24 +72,24 @@ class Scanner
 
     case char
     when "("
-      add_token(:left_paren)
+      add_token("LEFT_PAREN")
     when ")"
-      add_token(:right_paren)
+      add_token("RIGHT_PAREN")
     when "{"
-      add_token(:left_brace)
+      add_token("LEFT_BRACE")
     when "}"
-      add_token(:right_brace)
+      add_token("RIGHT_BRACE")
     when "!"
       if consume_char_if!("=")
-        add_token(:bang_equal)
+        add_token("BANG_EQUAL")
       else
-        add_token(:bang)
+        add_token("BANG")
       end
     when "="
       if consume_char_if!("=")
-        add_token(:equal_equal)
+        add_token("EQUAL_EQUAL")
       else
-        add_token(:equal)
+        add_token("EQUAL")
       end
     when "/"
       if consume_char_if!("/")
@@ -97,7 +97,7 @@ class Scanner
           # consume comment until newline / EOF
         end
       else
-        add_token(:slash)
+        add_token("SLASH")
       end
     when " ", "\t", "\r", "\n"
       # ignore whitespace
@@ -123,7 +123,7 @@ class Scanner
       end
     end
 
-    add_token(:number, literal: @source[@start_index...@current_index].to_f)
+    add_token("NUMBER", literal: @source[@start_index...@current_index].to_f)
   end
 
   def consume_string!
@@ -132,7 +132,7 @@ class Scanner
     end
 
     if consume_char_if!('"')
-      add_token(:string, literal: @source[@start_index + 1...@current_index - 1])
+      add_token("STRING", literal: @source[@start_index + 1...@current_index - 1])
     else
       add_error("Unterminated string '#{@source[@start_index + 1...@current_index]}'")
     end
