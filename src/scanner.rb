@@ -115,6 +115,7 @@ class Scanner
   def consume_number!
     while current_char.match?(/[0-9]/)
       consume_char!
+      break if is_at_end?
     end
 
     if current_char == "." && next_char.match?(/[0-9]/)

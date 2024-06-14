@@ -1,5 +1,5 @@
 class Token
-  attr_reader :type, :lexeme, :line_number
+  attr_reader :type, :lexeme, :line_number, :literal
 
   def initialize(type, lexeme, literal, line_number)
     @type = type

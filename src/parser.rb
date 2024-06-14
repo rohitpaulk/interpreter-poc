@@ -1,4 +1,6 @@
 class Parser
+  class ParseError < StandardError; end
+
   attr_accessor :tokens_or_errors
 
   def initialize(tokens)
@@ -6,7 +8,18 @@ class Parser
     @current_index = 0
   end
 
+  def parse
+    expression_rule
+  rescue ParseError
+    nil
+  end
+
   protected
+
+  def advance!
+    @current_index += 1 unless at_end?
+    previous_token
+  end
 
   def expression_rule
     equality_rule
@@ -15,10 +28,10 @@ class Parser
   def equality_rule
     expression = primary_rule # TODO: Change to comparison_rule later
 
-    while match!(:bang_equal, :equal_equal)
-      operator = previous # TODO: What happens if there is no previous token?
-      right = comparison_rule
-      expression = Expression::Binary.new(expression, operator, right)
+    while match!("EQUAL_EQUAL", "BANG_EQUAL")
+      operator = previous_token # TODO: What happens if there is no previous token?
+      right = primary_rule # TODO: Change to compression_rule later
+      expression = Expressions::Binary.new(expression, operator, right)
     end
 
     expression
@@ -40,12 +53,12 @@ class Parser
   end
 
   def primary_rule
-    if match!(:nil)
+    if match!("NIL")
       Expressions::Literal.new(nil)
-    elsif match!(:number, :string)
-      Expressions::Literal.new(previous.literal)
+    elsif match!("NUMBER", "STRING")
+      Expressions::Literal.new(previous_token.literal)
     else
-      raise "Unexpected token: #{previous.type}"
+      raise "Unexpected token: #{previous_token.type}"
     end
   end
 
@@ -57,7 +70,7 @@ class Parser
     @tokens[@current_index]
   end
 
-  def previous
+  def previous_token
     @tokens[@current_index - 1]
   end
 end

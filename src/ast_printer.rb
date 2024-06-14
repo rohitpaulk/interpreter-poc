@@ -3,9 +3,9 @@ class AstPrinter
     expression.accept(self)
   end
 
-  # def visit_binary_expression(expression)
-  #   parenthesize(expression.operator, expression.left, expression.right)
-  # end
+  def visit_binary_expression(expression)
+    parenthesize(expression.operator.lexeme, expression.left, expression.right)
+  end
 
   def visit_literal_expression(expression)
     if expression.value.nil?
@@ -17,9 +17,9 @@ class AstPrinter
     end
   end
 
-  def visit_unary_expression(expression)
-    parenthesize(expression.operator, expression.right)
-  end
+  # def visit_unary_expression(expression)
+  #   parenthesize(expression.operator, expression.right)
+  # end
 
   # def visit_grouping_expression(expression)
   #   parenthesize("group", expression.expression)
