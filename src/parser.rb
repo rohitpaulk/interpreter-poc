@@ -50,7 +50,7 @@ class Parser
   end
 
   def at_end?
-    peek.type == :EOF
+    peek.type == "EOF"
   end
 
   def peek

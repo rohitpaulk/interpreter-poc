@@ -23,6 +23,8 @@ class Scanner
       scan_token
     end
 
+    add_token("EOF")
+
     tokens_or_errors
   end
 
