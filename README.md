@@ -115,18 +115,39 @@ https://craftinginterpreters.com/scanning.html#number-literals
 
 # Extension 1: Parsing Expressions
 
-## Stage #1. Binary operators: Equality
+Grammar for full extension:
+
+```bash
+expression     → literal
+               | unary
+               | binary
+               | grouping ;
+
+literal        → NUMBER | STRING | "true" | "false" | "nil" ;
+grouping       → "(" expression ")" ;
+unary          → ( "-" | "!" ) expression ;
+binary         → expression operator expression ;
+operator       → "==" | "!=" | "<" | "<=" | ">" | ">="
+               | "+"  | "-"  | "*" | "/" ;
+```
+
+## Stage #1. Unary operators & Literals
 
 ```
-"hello" == "world"
+-1 => (- 1)
+!2 => (! 2)
+!true => (+ true)
+!false => (- false)
+!"test" => (! "test")
 ```
 
+## Stage #2. Binary operators: Addition & Subtraction
+
 ```
-./your_program.sh parse test.lox
-(== "hello" "world")
+1 + 2 - 3 => (+ 1 (- 2 3))
 ```
 
-## Stage #2. Binary operators: Inequality
+## Stage #3. Binary operators: Multiplication & Division
 
 ```
 "hello" != "world"
