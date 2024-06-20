@@ -2,11 +2,33 @@ Follows the book https://craftinginterpreters.com/.
 
 Chapters to test names: https://github.com/munificent/craftinginterpreters/blob/01e6f5b8f3e5dfa65674c2f9cf4700d73ab41cf8/tool/bin/test.dart#L599
 
+# Stage #1. Scanning: EOF
+
+In this stage, you'll start implementing a "Scanner" as described in the ["Scanning" chapter](https://craftinginterpreters.com/scanning.html#recognizing-lexemes).
+
+We'll start with parsing an empty file, which should return a single token: `EOF`.
+
+### Tests
+
+The tester will create an empty file `test.lox` and execute your program like this:
+
+```bash
+./your_program.sh tokenize test.lox
+```
+
+The output should be:
+
+```
+EOF null null
+```
+
 # Stage #1. Scanning: Parentheses
 
-https://craftinginterpreters.com/scanning.html#recognizing-lexemes
+In this stage, you'll start implementing a "Scanner" as described in the ["Scanning" chapter](https://craftinginterpreters.com/scanning.html#recognizing-lexemes).
 
-`(` and `)`
+We'll start with parsing parentheses (`(` and `)`).
+
+## Tests
 
 The tester will create a file `test.lox` with the tokens `(` and `)` in random order. For example:
 
@@ -26,12 +48,15 @@ The tester will verify that the output matches the tokens in `test.lox`:
 LEFT_PAREN ( null
 LEFT_PAREN ( null
 RIGHT_PAREN ) null
-EOF null
+EOF null null
 ```
 
-Notes:
+This output format matches that in [`lox/Token.java`](https://craftinginterpreters.com/scanning.html#location-information) from the book.
 
-- The `null` is just a placeholder for the "literal" value, which we'll use later when dealing with strings.
+### Notes
+
+- `null` is just a placeholder for the "literal" value, which we'll use later when dealing with strings & numbers.
+- The last token is `EOF`, which stands for "End of File". This is a special token that represents the end of the input file.
 
 # Stage #2. Scanning: Braces
 
